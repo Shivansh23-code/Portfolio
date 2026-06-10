@@ -29,7 +29,11 @@ export default function Experience() {
                     <span className="job-company">@ {job.company}</span>
                   </div>
                   <span className="job-status">
-                    <span className={`dot${job.status === "running" ? "" : " idle"}`} />
+                    <span
+                      className={`dot${
+                        job.status === "running" ? " live" : " idle"
+                      }`}
+                    />
                     {job.status === "running" ? "Running" : "Shipped"}
                   </span>
                 </div>

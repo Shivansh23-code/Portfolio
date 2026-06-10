@@ -29,7 +29,7 @@ export default function Projects() {
                     0{i + 1} / project
                   </span>
                   <span className="job-status">
-                    <span className="dot" />
+                    <span className={`dot${p.status === "live" ? " live" : ""}`} />
                     {p.status}
                   </span>
                 </div>

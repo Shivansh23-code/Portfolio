@@ -1,6 +1,7 @@
 import { ArrowRight, Terminal } from "lucide-react";
 import { profile, metrics } from "../data/content";
 import Reveal from "./Reveal";
+import CountUp from "./CountUp";
 
 export default function Hero() {
   return (
@@ -8,7 +9,7 @@ export default function Hero() {
       <div className="container">
         <Reveal>
           <span className="hero-badge">
-            <span className="dot" />
+            <span className="dot live" />
             {profile.available
               ? "Available for SDE-1 roles"
               : "Building in production"}
@@ -39,10 +40,18 @@ export default function Hero() {
 
         <Reveal delay={240}>
           <div className="hero-cta">
-            <a href="#contact" className="btn btn-primary btn-lg btn-pill">
+            <a
+              href="#contact"
+              className="btn btn-primary btn-lg btn-pill magnetic"
+              data-magnetic
+            >
               Start a conversation <ArrowRight />
             </a>
-            <a href="#work" className="btn btn-ghost btn-lg btn-pill">
+            <a
+              href="#work"
+              className="btn btn-ghost btn-lg btn-pill magnetic"
+              data-magnetic
+            >
               View work
             </a>
           </div>
@@ -53,8 +62,7 @@ export default function Hero() {
             {metrics.map((m) => (
               <div key={m.label}>
                 <div className="hero-stat-value">
-                  {m.value}
-                  {m.suffix}
+                  <CountUp to={m.value} suffix={m.suffix} />
                 </div>
                 <div className="hero-stat-label">{m.label}</div>
               </div>

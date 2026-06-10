@@ -1,0 +1,13 @@
+{
+  "name": "Shivansh Tiwari — Java Full Stack Developer",
+  "short_name": "Shivansh",
+  "description": "Portfolio of Shivansh Tiwari, a backend-focused Java Full Stack Developer.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#111827",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

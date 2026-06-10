@@ -42,7 +42,7 @@ export default function Header() {
         </nav>
 
         <div className="header-actions">
-          <a href="#contact" className="btn btn-primary">
+          <a href="#contact" className="btn btn-primary magnetic" data-magnetic>
             Get in touch
           </a>
           <button
