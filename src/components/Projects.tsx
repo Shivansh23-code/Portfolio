@@ -1,67 +1,80 @@
-import { ArrowUpRight } from "lucide-react";
+import {
+  Package,
+  Bot,
+  Briefcase,
+  FileText,
+  ShoppingCart,
+  Network,
+  Github,
+  ExternalLink,
+} from "lucide-react";
+import type { ComponentType } from "react";
 import { projects } from "../data/content";
 import Reveal from "./Reveal";
+
+const PROJECT_ICONS: Record<string, ComponentType> = {
+  "SIA — Smart Inventory": Package,
+  Privoraa: Bot,
+  "Job Portal": Briefcase,
+  "Resume System": FileText,
+  RightAway: ShoppingCart,
+  "System Configurator": Network,
+};
 
 export default function Projects() {
   return (
     <section id="work">
       <div className="container">
-        <div className="section-head">
-          <Reveal>
-            <span className="eyebrow">Work</span>
-          </Reveal>
-          <Reveal delay={60}>
-            <h2 className="section-title">Things I've shipped</h2>
-          </Reveal>
-          <Reveal delay={120}>
-            <p className="section-sub">
-              A backend platform and a frontend build — more on the way.
-            </p>
-          </Reveal>
-        </div>
+        <Reveal>
+          <span className="eyebrow">
+            <span className="verb">GET</span> /projects
+          </span>
+          <h2 className="section-title">Things I've shipped.</h2>
+          <p className="section-sub">
+            Projects where I owned the architecture end to end — from secured
+            REST services to polished frontends.
+          </p>
+        </Reveal>
 
-        <div className="cards-grid">
-          {projects.map((p, i) => (
-            <Reveal key={p.name} delay={i * 100}>
-              <article className="card project-card">
-                <div className="project-top">
-                  <span className="project-index">
-                    0{i + 1} / project
-                  </span>
-                  <span className="job-status">
-                    <span className={`dot${p.status === "live" ? " live" : ""}`} />
-                    {p.status}
-                  </span>
-                </div>
-
-                <h3 className="project-name">{p.name}</h3>
-                <p className="project-subtitle">{p.subtitle}</p>
-                <p className="project-blurb">{p.blurb}</p>
-
-                <div className="chips">
-                  {p.stack.map((s) => (
-                    <span key={s} className="chip">
-                      {s}
+        <div className="proj-grid">
+          {projects.map((p, i) => {
+            const Icon = PROJECT_ICONS[p.name] ?? Package;
+            return (
+              <Reveal key={p.name} delay={(i % 2) * 80}>
+                <div className="fx-card proj-card">
+                  <div className="proj-top">
+                    <span className="proj-badge">
+                      <Icon />
                     </span>
-                  ))}
+                    <div className="proj-links">
+                      {p.links.map((link) => {
+                        const isDemo = /demo|live/i.test(link.label);
+                        return (
+                          <a
+                            key={link.label}
+                            href={link.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label={link.label}
+                            title={link.label}
+                          >
+                            {isDemo ? <ExternalLink /> : <Github />}
+                          </a>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <h3>{p.name}</h3>
+                  <p>{p.blurb}</p>
+                  <div className="proj-stack">
+                    {p.stack.map((s) => (
+                      <span key={s}>{s}</span>
+                    ))}
+                  </div>
                 </div>
-
-                <div className="project-links">
-                  {p.links.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="btn btn-ghost"
-                    >
-                      {link.label} <ArrowUpRight />
-                    </a>
-                  ))}
-                </div>
-              </article>
-            </Reveal>
-          ))}
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>

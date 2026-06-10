@@ -1,43 +1,47 @@
+import { Code2, LayoutGrid, Database, Wrench, Boxes } from "lucide-react";
 import { stack } from "../data/content";
 import Reveal from "./Reveal";
+
+const ICONS = [Code2, LayoutGrid, Database, Wrench, Boxes];
 
 export default function Stack() {
   return (
     <section id="stack">
       <div className="container">
-        <div className="section-head">
-          <Reveal>
-            <span className="eyebrow">Toolbox</span>
-          </Reveal>
-          <Reveal delay={60}>
-            <h2 className="section-title">My stack</h2>
-          </Reveal>
-          <Reveal delay={120}>
-            <p className="section-sub">
-              The languages, frameworks and infrastructure I reach for, grouped
-              by layer.
-            </p>
-          </Reveal>
-        </div>
+        <Reveal>
+          <span className="eyebrow">
+            <span className="verb">GET</span> /skills
+          </span>
+          <h2 className="section-title">The toolkit.</h2>
+          <p className="section-sub">
+            A backend-leaning stack built around Spring Boot, with the
+            event-driven and real-time pieces I reach for in production.
+          </p>
+        </Reveal>
 
-        <div className="stack-grid">
-          {stack.map((layer, i) => (
-            <Reveal key={layer.layer} delay={i * 80}>
-              <article className="card stack-card">
-                <div className="stack-head">
-                  <span className="stack-layer">{layer.layer}</span>
-                  <span className="stack-code">{layer.code}</span>
-                </div>
-                <div className="chips">
-                  {layer.items.map((item) => (
-                    <span key={item} className="chip">
-                      {item}
+        <div className="skills-grid">
+          {stack.map((layer, i) => {
+            const Icon = ICONS[i % ICONS.length];
+            return (
+              <Reveal key={layer.layer} delay={(i % 2) * 80}>
+                <div className="fx-card skill-cat">
+                  <div className="skill-cat-head">
+                    <span className={`skill-ico ico-${i % 5}`}>
+                      <Icon />
                     </span>
-                  ))}
+                    <h3>{layer.layer}</h3>
+                  </div>
+                  <div className="chips">
+                    {layer.items.map((item) => (
+                      <span className="chip" key={item}>
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </article>
-            </Reveal>
-          ))}
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -341,6 +341,11 @@ export const projects: Project[] = [
 
 export const achievements: Achievement[] = [
   {
+    tag: "GATE 2026",
+    title: "GATE Score 286 — Computer Science (CS)",
+    detail: "Marks 24.49/100 · GATE Score 286 · All India Rank 52,096.",
+  },
+  {
     tag: "Hackathon",
     title: "Smart India Hackathon 2023 — Finalist",
     detail: "Reached the college-level finals and ranked among the Top 15 teams.",

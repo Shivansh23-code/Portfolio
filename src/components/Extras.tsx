@@ -1,63 +1,69 @@
-import { GraduationCap, Trophy, Award } from "lucide-react";
-import { education, achievements } from "../data/content";
+import { Trophy, Medal, Award, GraduationCap } from "lucide-react";
+import type { ComponentType } from "react";
+import { achievements, education } from "../data/content";
 import Reveal from "./Reveal";
 
-const ACH_ICONS = [Trophy, Award];
+const ICON_BY_TAG: Record<string, ComponentType> = {
+  "GATE 2026": Award,
+  Hackathon: Trophy,
+  Athletics: Medal,
+};
 
 export default function Extras() {
   return (
     <section id="extras">
       <div className="container">
-        <div className="section-head">
-          <Reveal>
-            <span className="eyebrow">More</span>
-          </Reveal>
-          <Reveal delay={60}>
-            <h2 className="section-title">Education &amp; beyond</h2>
-          </Reveal>
-          <Reveal delay={120}>
-            <p className="section-sub">
-              Where I studied, and a few things I'm proud of outside the editor.
-            </p>
-          </Reveal>
-        </div>
+        <Reveal>
+          <span className="eyebrow">
+            <span className="verb">GET</span> /highlights
+          </span>
+          <h2 className="section-title">Beyond the code.</h2>
+        </Reveal>
 
-        <div className="cards-grid">
-          <Reveal>
-            <article className="card">
-              <span className="card-icon">
-                <GraduationCap />
-              </span>
-              <h3 className="card-title">{education.degree}</h3>
-              <p className="card-text">
-                {education.school}
-                <br />
-                {education.university} · Graduated {education.year}
-              </p>
-              <div className="chips" style={{ marginTop: "1rem" }}>
-                <span className="chip chip-accent">GPA {education.gpa}</span>
-              </div>
-            </article>
-          </Reveal>
-
+        <div className="ach-grid">
           {achievements.map((a, i) => {
-            const Icon = ACH_ICONS[i % ACH_ICONS.length];
+            const Icon = ICON_BY_TAG[a.tag] ?? Trophy;
             return (
-              <Reveal key={a.title} delay={(i + 1) * 100}>
-                <article className="card">
-                  <span className="card-icon">
+              <Reveal key={a.title} delay={(i % 2) * 80}>
+                <div className="fx-card ach-card">
+                  <span className="ach-ico">
                     <Icon />
                   </span>
-                  <div className="chips" style={{ marginBottom: "0.75rem" }}>
-                    <span className="chip chip-accent">{a.tag}</span>
+                  <div>
+                    <h3>{a.title}</h3>
+                    <p>{a.detail}</p>
                   </div>
-                  <h3 className="card-title">{a.title}</h3>
-                  <p className="card-text">{a.detail}</p>
-                </article>
+                </div>
               </Reveal>
             );
           })}
         </div>
+
+        <Reveal delay={120}>
+          <div className="edu-strip">
+            <div className="eL">
+              <span className="ecap">
+                <GraduationCap />
+              </span>
+              <div>
+                <h3>{education.degree}</h3>
+                <p>
+                  {education.school} · {education.university} · Class of{" "}
+                  {education.year}
+                </p>
+              </div>
+            </div>
+            <div className="edu-gpa">
+              <div className="g">
+                {education.gpa.split("/")[0].trim()}
+                <span style={{ fontSize: "1rem", color: "var(--color-faint)" }}>
+                  /10
+                </span>
+              </div>
+              <div className="gl">GPA</div>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
