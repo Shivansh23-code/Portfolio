@@ -18,10 +18,11 @@ const MAX_TILT = 6; // degrees
    3D tilt (--rx / --ry), driven by one delegated listener over .fx-card. */
 function useCardInteractions() {
   useEffect(() => {
-    const reduce =
+    const disabled =
       typeof matchMedia !== "undefined" &&
-      matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
+      (matchMedia("(prefers-reduced-motion: reduce)").matches ||
+        matchMedia("(hover: none)").matches);
+    if (disabled) return;
 
     let current: HTMLElement | null = null;
     const reset = (card: HTMLElement | null) => {
@@ -55,10 +56,11 @@ function useCardInteractions() {
 /* Magnetic pull — elements with [data-magnetic] drift toward the cursor. */
 function useMagnetic() {
   useEffect(() => {
-    const reduce =
+    const disabled =
       typeof matchMedia !== "undefined" &&
-      matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
+      (matchMedia("(prefers-reduced-motion: reduce)").matches ||
+        matchMedia("(hover: none)").matches);
+    if (disabled) return;
 
     const els = Array.from(
       document.querySelectorAll<HTMLElement>("[data-magnetic]")

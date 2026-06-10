@@ -460,6 +460,14 @@ section {
   gap: 56px;
   align-items: center;
 }
+/* let the columns shrink so the terminal scrolls internally instead of
+   forcing horizontal page overflow on narrow screens */
+.hero-grid > * {
+  min-width: 0;
+}
+.terminal {
+  max-width: 100%;
+}
 .status-pill {
   display: inline-flex;
   align-items: center;
@@ -1324,22 +1332,35 @@ section {
 }
 
 /* ── responsive ───────────────────────────────────────────────────── */
+/* large screens: keep content centred, just ease the hero gap */
+@media (max-width: 1040px) {
+  .hero-grid {
+    gap: 40px;
+  }
+}
+
+/* tablet → stack the two-column layouts; collapse nav into the hamburger
+   here (a touch before 768) so the six nav links never crowd the bar */
 @media (max-width: 920px) {
+  section {
+    padding: 80px 0;
+  }
+  .hero {
+    padding-top: calc(var(--header-h) + 32px);
+  }
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 44px;
+    gap: 40px;
   }
   .about-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 30px;
   }
   .skills-grid,
   .proj-grid,
   .ach-grid {
     grid-template-columns: 1fr;
   }
-}
-@media (max-width: 768px) {
   .nav,
   .header-actions .btn {
     display: none;
@@ -1347,13 +1368,36 @@ section {
   .menu-toggle {
     display: inline-flex;
   }
+}
+
+/* large phones / small tablets */
+@media (max-width: 680px) {
   section {
-    padding: 72px 0;
+    padding: 64px 0;
+  }
+  .term-body {
+    font-size: 0.78rem;
+    padding: 16px 16px 20px;
+  }
+  .hero-cta {
+    gap: 10px;
+  }
+  .hero-cta .btn {
+    flex: 1 1 auto;
   }
 }
+
+/* phones */
 @media (max-width: 560px) {
   .hero-stats {
-    gap: 22px;
+    gap: 16px 26px;
+  }
+  .stat .num {
+    font-size: 1.55rem;
+  }
+  .ach-card {
+    gap: 14px;
+    padding: 20px;
   }
   .contact-card {
     padding: 44px 22px;
@@ -1364,6 +1408,60 @@ section {
   }
   .edu-gpa {
     text-align: left;
+  }
+}
+
+/* small phones */
+@media (max-width: 420px) {
+  .container {
+    padding: 0 16px;
+  }
+  section {
+    padding: 52px 0;
+  }
+  .hero {
+    padding-top: calc(var(--header-h) + 22px);
+  }
+  .hero h1 {
+    font-size: clamp(1.85rem, 8.5vw, 2.4rem);
+  }
+  .hero-lead {
+    font-size: 1.02rem;
+  }
+  .status-pill {
+    font-size: 0.74rem;
+  }
+  .term-body {
+    font-size: 0.72rem;
+    line-height: 1.7;
+  }
+  .stat .num {
+    font-size: 1.4rem;
+  }
+  .skill-cat,
+  .proj-card,
+  .about-card {
+    padding: 20px;
+  }
+  .contact-card {
+    padding: 36px 18px;
+    border-radius: 18px;
+  }
+  .contact-actions .btn {
+    flex: 1 1 100%;
+  }
+  .section-sub {
+    font-size: 0.96rem;
+  }
+}
+
+/* very small / legacy phones (≤360px) */
+@media (max-width: 360px) {
+  .hero-stats {
+    gap: 14px 20px;
+  }
+  .hero h1 {
+    font-size: clamp(1.7rem, 9vw, 2.1rem);
   }
 }
 

@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="container foot-inner">
         <span className="fl">
-          © {year} {profile.name} · Built with Spring Boot energy ⚡
+          © {year} {profile.name} — Portfolio · Built with Spring Boot energy ⚡
         </span>
         <div className="foot-soc">
           <a href={`mailto:${contact.email}`} aria-label="Email">
