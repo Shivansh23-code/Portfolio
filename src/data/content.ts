@@ -271,7 +271,7 @@ export const projects: Project[] = [
       "A responsive frontend UI for a private, offline-first AI assistant — refined for a smooth, consistent experience across every device.",
     stack: ["React.js", "Vite", "JavaScript", "HTML5", "CSS3"],
     links: [
-      { label: "Live Demo", href: "https://privoraa.vercel.app/" },
+      { label: "Live Demo", href: "https://privoraaai.vercel.app/" },
       { label: "GitHub", href: "https://github.com/Shivansh23-code/Privoraa" },
     ],
   },
